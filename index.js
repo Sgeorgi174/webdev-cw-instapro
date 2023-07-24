@@ -1,4 +1,4 @@
-import { getPosts } from "./api.js";
+import { getPosts, addNewPost } from "./api.js";
 import { renderAddPostPageComponent } from "./components/add-post-page-component.js";
 import { renderAuthPageComponent } from "./components/auth-page-component.js";
 import {
@@ -15,6 +15,7 @@ import {
   removeUserFromLocalStorage,
   saveUserToLocalStorage,
 } from "./helpers.js";
+
 
 export let user = getUserFromLocalStorage();
 export let page = null;
@@ -109,9 +110,8 @@ const renderApp = () => {
   if (page === ADD_POSTS_PAGE) {
     return renderAddPostPageComponent({
       appEl,
-      onAddPostClick({ description, imageUrl }) {
-        // TODO: реализовать добавление поста в API
-        console.log("Добавляю пост...", { description, imageUrl });
+      onAddPostClick({description, imageUrl}) {
+        addNewPost({token: getToken(), description: description, imageUrl: imageUrl})
         goToPage(POSTS_PAGE);
       },
     });
