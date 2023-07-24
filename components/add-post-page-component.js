@@ -2,7 +2,11 @@ import { renderHeaderComponent } from "./header-component.js";
 import { renderUploadImageComponent } from "./upload-image-component.js";
 
 export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
-  let imageUrl = ''
+  let imageUrl = "";
+
+  const setError = (message) => {
+    appEl.querySelector(".form-error").textContent = message;
+  };
 
   const render = () => {
     const appHtml = `
@@ -17,21 +21,20 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
               Выберите фото
           </label>
           </div>
-          <input type="text" id="description-input" class="input" placeholder="Описание картинки" />      
+          <input type="text" id="description-input" class="input" placeholder="Описание картинки" />
+          <div class="form-error"></div>      
             <button class="button" id="add-post-button">Добавить</button>
+            
         </div>
     </div>
   </div>    `;
 
-
-  
-
     appEl.innerHTML = appHtml;
- 
+
     renderHeaderComponent({
       element: document.querySelector(".header-container"),
     });
-  
+
     for (let userEl of document.querySelectorAll(".post-header")) {
       userEl.addEventListener("click", () => {
         goToPage(USER_POSTS_PAGE, {
@@ -40,10 +43,10 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
       });
     }
 
+    const uploadImageContainer = document.querySelector(
+      ".upload-image-container"
+    );
 
-
-    const uploadImageContainer = document.querySelector(".upload-image-container");
-    
     if (uploadImageContainer) {
       renderUploadImageComponent({
         element: appEl.querySelector(".upload-image-container"),
@@ -51,18 +54,19 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
           imageUrl = newImageUrl;
         },
       });
-    };
+    }
 
     document.getElementById("add-post-button").addEventListener("click", () => {
-      const descriptionInput = document.getElementById('description-input').value
+      const descriptionInput =
+        document.getElementById("description-input").value;
 
       if (!descriptionInput) {
-        alert ('Добавьте описание!')
+        setError("Добавьте описание!");
         return;
       }
-      
+
       if (!imageUrl) {
-        alert('Выберите фото!')
+        setError("Выберите фото!");
         return;
       }
 
@@ -73,7 +77,5 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
     });
   };
 
-  
-  
   render();
 }

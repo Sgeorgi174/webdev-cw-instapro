@@ -1,4 +1,4 @@
-import { USER_POSTS_PAGE, ADD_POSTS_PAGE } from "../routes.js";
+import { USER_POSTS_PAGE, AUTH_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage } from "../index.js";
 import { getUserFromLocalStorage } from "../helpers.js";
@@ -103,7 +103,7 @@ export function renderPostsPageComponent({ appEl }) {
           }
         } else {
           alert("Только авторизованные пользователи могут ставить лайки");
-          goToPage(ADD_POSTS_PAGE);
+          goToPage(AUTH_PAGE);
         }
       });
     });
