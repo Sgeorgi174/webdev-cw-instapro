@@ -1,5 +1,6 @@
 import { loginUser, registerUser } from "../api.js";
 import { renderHeaderComponent } from "./header-component.js";
+import { secureReplace } from "./sanitize-html-component.js";
 import { renderUploadImageComponent } from "./upload-image-component.js";
 
 export function renderAuthPageComponent({ appEl, setUser }) {
@@ -83,17 +84,17 @@ export function renderAuthPageComponent({ appEl, setUser }) {
         const password = document.getElementById("password-input").value;
 
         if (!login) {
-          setError('Введите Логин!')
+          setError("Введите Логин!");
           return;
         }
 
         if (!password) {
-          setError('Введите Пароль!')
+          setError("Введите Пароль!");
           return;
         }
 
         loginUser({
-          login: login,
+          login: secureReplace(login),
           password: password,
         })
           .then((user) => {
@@ -108,28 +109,28 @@ export function renderAuthPageComponent({ appEl, setUser }) {
         const name = document.getElementById("name-input").value;
         const password = document.getElementById("password-input").value;
         if (!name) {
-          setError('Введите Имя!')
+          setError("Введите Имя!");
           return;
         }
         if (!login) {
-          setError('Введите Логин!')
+          setError("Введите Логин!");
           return;
         }
 
         if (!password) {
-          setError('Введите Пароль!')
+          setError("Введите Пароль!");
           return;
         }
 
         if (!imageUrl) {
-          setError('Не Выбрана Фотография!')
+          setError("Не Выбрана Фотография!");
           return;
         }
 
         registerUser({
-          login: login,
+          login: secureReplace(login),
           password: password,
-          name: name,
+          name: secureReplace(name),
           imageUrl,
         })
           .then((user) => {

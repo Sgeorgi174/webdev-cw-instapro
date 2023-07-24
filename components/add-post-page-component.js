@@ -1,4 +1,7 @@
+import { goToPage } from "../index.js";
+import { POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
+import { secureReplace } from "./sanitize-html-component.js";
 import { renderUploadImageComponent } from "./upload-image-component.js";
 
 export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
@@ -71,9 +74,11 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
       }
 
       onAddPostClick({
-        description: descriptionInput,
-        imageUrl: imageUrl,
+        description: secureReplace(descriptionInput),
+        imageUrl: secureReplace(imageUrl),
       });
+
+      goToPage(POSTS_PAGE);
     });
   };
 
