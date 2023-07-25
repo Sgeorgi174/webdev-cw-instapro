@@ -13,6 +13,6 @@ export function likes(arr) {
     case 3:
       return `${namesArr[0]}, ${namesArr[1]} и ${namesArr[2]}`;
     default:
-      return `${names[0]}, ${names[1]} и еще ${names.length - 2}`;
+      return `${namesArr[0]}, ${namesArr[1]} и еще ${namesArr.length - 2}`;
   }
 }
