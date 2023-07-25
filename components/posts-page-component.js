@@ -80,21 +80,19 @@ export function renderPostsPageComponent({ appEl }) {
       const deleteButtons = document.querySelectorAll(".delete-post");
       deleteButtons.forEach((deleteButton) => {
         deleteButton.addEventListener("click", () => {
-          if (user) {
-            let postId = deleteButton.dataset.postId;
-            let index = posts.findIndex((el) => el.id === postId);
-            deleteYourPost({
-              id: postId,
-              token: `Bearer ${user.token}`,
+          let postId = deleteButton.dataset.postId;
+          let index = posts.findIndex((el) => el.id === postId);
+          deleteYourPost({
+            id: postId,
+            token: `Bearer ${user.token}`,
+          })
+            .then(() => {
+              posts.splice(index, 1);
+              renderPosts();
             })
-              .then(() => {
-                posts.splice(index, 1);
-                renderPosts();
-              })
-              .catch((error) => {
-                console.error(error.message);
-              });
-          }
+            .catch((error) => {
+              console.error(error.message);
+            });
         });
       });
     }
