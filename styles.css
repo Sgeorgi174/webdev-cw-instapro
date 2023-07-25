@@ -104,6 +104,7 @@
 
 .post-date {
   color: #8a8a8a;
+  margin-bottom: 16px;
 }
 
 .post + .post {
@@ -215,7 +216,6 @@
 }
 
 .delete-post {
-  margin-top: 16px;
   cursor: pointer;
   font-family: "StratosSkyeng";
   font-style: normal;
@@ -224,9 +224,8 @@
   background-color: #6484dd;
   outline: none;
   border: none;
-  color: #e0e0e0;
-  height: 26px;
-  width: 150px;
+  color: #ffffff;
+  padding: 9px 12px;
   border-radius: 25px;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
