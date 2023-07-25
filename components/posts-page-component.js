@@ -1,9 +1,8 @@
 import { USER_POSTS_PAGE, AUTH_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage, user } from "../index.js";
-import { getUserFromLocalStorage } from "../helpers.js";
 import { addDislike, addLike, deleteYourPost } from "../api.js";
-import { likes } from "./likes-names-components.js";
+import { likes } from "./likes-names-function.js";
 import { formatDistanceToNow } from "date-fns";
 import { ru } from "date-fns/locale";
 

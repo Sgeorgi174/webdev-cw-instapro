@@ -1,7 +1,6 @@
 import { goToPage } from "../index.js";
-import { POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
-import { secureReplace } from "./sanitize-html-component.js";
+import { secureReplace } from "./sanitize-html-function.js";
 import { renderUploadImageComponent } from "./upload-image-component.js";
 
 export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
