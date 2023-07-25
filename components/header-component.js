@@ -18,7 +18,11 @@ export function renderHeaderComponent({ element }) {
       }
       </button>
      <div class="header-right">
-     <div title="Мой профиль" class="add-post-sign my-profile"></div>
+     ${
+       user
+         ? `<img src=${user.imageUrl} class="post-header__user-image my-profile">`
+         : `<div title="Мой профиль" class="add-post-sign my-profile"></div>`
+     }
     ${
       user
         ? `<button title="${user.name}" class="header-button logout-button">Выйти</button>`
