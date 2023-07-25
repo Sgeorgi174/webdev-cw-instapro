@@ -93,6 +93,21 @@ export function addNewPost({ token, description, imageUrl }) {
   });
 }
 
+export function deleteYourPost({ token, id }) {
+  return fetch(`${postsHost}/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: token,
+    },
+  }).then((response) => {
+    if (response.status === 200) {
+      return response.json();
+    } else {
+      throw new Error("что-то пошло не так");
+    }
+  });
+}
+
 //регистрация нового пользователя
 export function registerUser({ login, password, name, imageUrl }) {
   return fetch(baseHost + "/api/user", {

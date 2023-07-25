@@ -77,8 +77,6 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
         description: secureReplace(descriptionInput),
         imageUrl: secureReplace(imageUrl),
       });
-
-      goToPage(POSTS_PAGE);
     });
   };
 

@@ -213,3 +213,26 @@
 .hidden {
   display: none;
 }
+
+.delete-post {
+  margin-top: 16px;
+  cursor: pointer;
+  font-family: "StratosSkyeng";
+  font-style: normal;
+  font-weight: 500;
+
+  background-color: #6484dd;
+  outline: none;
+  border: none;
+  color: #e0e0e0;
+  height: 26px;
+  width: 150px;
+  border-radius: 25px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.delete-post:hover {
+  box-shadow: 0px 0px 25px 5px rgba(34, 60, 80, 0.2);
+  background-color: #dd6464;
+
+}
