@@ -5,7 +5,7 @@ import { getUserFromLocalStorage } from "../helpers.js";
 import { addDislike, addLike } from "../api.js";
 import { likes } from "./likes-names-components.js";
 import { formatDistanceToNow } from "date-fns";
-import { es, de, ja, en, ru } from "date-fns/locale";
+import { ru } from "date-fns/locale";
 
 export function renderPostsPageComponent({ appEl }) {
   function renderPosts() {
