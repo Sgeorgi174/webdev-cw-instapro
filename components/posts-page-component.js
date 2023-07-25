@@ -4,19 +4,13 @@ import { posts, goToPage } from "../index.js";
 import { getUserFromLocalStorage } from "../helpers.js";
 import { addDislike, addLike } from "../api.js";
 import { likes } from "./likes-names-components.js";
+import { formatDistanceToNow } from "date-fns";
+import { es, de, ja, en, ru } from "date-fns/locale";
 
 export function renderPostsPageComponent({ appEl }) {
-  console.log(posts);
-  /**
-   * TODO: чтобы отформатировать дату создания поста в виде "19 минут назад"
-   * можно использовать https://date-fns.org/v2.29.3/docs/formatDistanceToNow
-   */
   function renderPosts() {
     let postHtml = posts
       .map((el) => {
-        // el.likes.forEach((el) => {
-        //   console.log(el.name);
-        // });
         return `<li class="post">
     <div class="post-header" data-user-id=${el.user.id}>
         <img src=${el.user.imageUrl} class="post-header__user-image">
@@ -42,7 +36,10 @@ export function renderPostsPageComponent({ appEl }) {
       ${el.description}
     </p>
     <p class="post-date">
-      19 минут назад
+      ${formatDistanceToNow(new Date(el.createdAt), {
+        locale: ru,
+        addSuffix: true,
+      })}
     </p>
   </li>`;
       })
@@ -107,7 +104,6 @@ export function renderPostsPageComponent({ appEl }) {
                   id: getUserFromLocalStorage()._id,
                   name: getUserFromLocalStorage().name,
                 });
-                console.log(posts[index]);
                 renderPosts();
               })
               .catch((error) => {
