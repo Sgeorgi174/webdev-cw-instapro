@@ -7,6 +7,7 @@ import {
   LOADING_PAGE,
   POSTS_PAGE,
   USER_POSTS_PAGE,
+  MY_POST_PAGE,
 } from "./routes.js";
 import { renderPostsPageComponent } from "./components/posts-page-component.js";
 import { renderLoadingPageComponent } from "./components/loading-page-component.js";
@@ -42,6 +43,7 @@ export const goToPage = (newPage, data) => {
       ADD_POSTS_PAGE,
       USER_POSTS_PAGE,
       LOADING_PAGE,
+      MY_POST_PAGE,
     ].includes(newPage)
   ) {
     if (newPage === ADD_POSTS_PAGE) {
@@ -63,6 +65,24 @@ export const goToPage = (newPage, data) => {
         .catch((error) => {
           console.error(error);
           goToPage(POSTS_PAGE);
+        });
+    }
+
+    if (newPage === MY_POST_PAGE) {
+      page = LOADING_PAGE;
+      renderApp();
+
+      return getUserPosts({
+        token: getToken(),
+        id: getUserFromLocalStorage()._id,
+      })
+        .then((newPosts) => {
+          page = USER_POSTS_PAGE;
+          posts = newPosts;
+          return renderApp();
+        })
+        .catch((error) => {
+          console.error(error);
         });
     }
 

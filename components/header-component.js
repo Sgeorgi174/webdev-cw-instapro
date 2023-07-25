@@ -1,5 +1,10 @@
 import { goToPage, logout, user } from "../index.js";
-import { ADD_POSTS_PAGE, AUTH_PAGE, POSTS_PAGE } from "../routes.js";
+import {
+  ADD_POSTS_PAGE,
+  AUTH_PAGE,
+  POSTS_PAGE,
+  MY_POST_PAGE,
+} from "../routes.js";
 
 export function renderHeaderComponent({ element }) {
   element.innerHTML = `
@@ -9,15 +14,18 @@ export function renderHeaderComponent({ element }) {
       ${
         user
           ? `<div title="Добавить пост" class="add-post-sign"></div>`
-          : "Войти"
+          : `<div title="Добавить пост" class="add-post-sign hidden"></div>`
       }
       </button>
-      ${
-        user
-          ? `<button title="${user.name}" class="header-button logout-button">Выйти</button>`
-          : ""
-      }  
-      </button>
+     <div class="header-right">
+     <div title="Мой профиль" class="add-post-sign my-profile"></div>
+    ${
+      user
+        ? `<button title="${user.name}" class="header-button logout-button">Выйти</button>`
+        : ""
+    }  
+    </button>
+     </div>
   </div>
   
 `;
@@ -34,6 +42,14 @@ export function renderHeaderComponent({ element }) {
 
   element.querySelector(".logo").addEventListener("click", () => {
     goToPage(POSTS_PAGE);
+  });
+
+  element.querySelector(".my-profile").addEventListener("click", () => {
+    if (user) {
+      goToPage(MY_POST_PAGE);
+    } else {
+      goToPage(AUTH_PAGE);
+    }
   });
 
   element.querySelector(".logout-button")?.addEventListener("click", logout);

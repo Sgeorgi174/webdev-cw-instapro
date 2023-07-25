@@ -3,6 +3,7 @@ import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage } from "../index.js";
 import { getUserFromLocalStorage } from "../helpers.js";
 import { addDislike, addLike } from "../api.js";
+import { likes } from "./likes-names-components.js";
 
 export function renderPostsPageComponent({ appEl }) {
   console.log(posts);
@@ -13,6 +14,9 @@ export function renderPostsPageComponent({ appEl }) {
   function renderPosts() {
     let postHtml = posts
       .map((el) => {
+        // el.likes.forEach((el) => {
+        //   console.log(el.name);
+        // });
         return `<li class="post">
     <div class="post-header" data-user-id=${el.user.id}>
         <img src=${el.user.imageUrl} class="post-header__user-image">
@@ -30,7 +34,7 @@ export function renderPostsPageComponent({ appEl }) {
         }>
       </button>
       <p class="post-likes-text">
-        Нравится: <strong class="like-counter">${el.likes.length}</strong>
+        Нравится: <strong class="like-counter">${likes(el.likes)}</strong>
       </p>
     </div>
     <p class="post-text">
@@ -81,7 +85,12 @@ export function renderPostsPageComponent({ appEl }) {
             })
               .then(() => {
                 posts[index].isLiked = false;
-                posts[index].likes.length -= 1;
+                posts[index].likes.splice(
+                  posts[index].likes.findIndex(
+                    (el) => el.id === getUserFromLocalStorage()._id
+                  ),
+                  1
+                );
                 renderPosts();
               })
               .catch((error) => {
@@ -94,7 +103,11 @@ export function renderPostsPageComponent({ appEl }) {
             })
               .then(() => {
                 posts[index].isLiked = true;
-                posts[index].likes.length += 1;
+                posts[index].likes.push({
+                  id: getUserFromLocalStorage()._id,
+                  name: getUserFromLocalStorage().name,
+                });
+                console.log(posts[index]);
                 renderPosts();
               })
               .catch((error) => {

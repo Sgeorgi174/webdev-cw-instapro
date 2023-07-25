@@ -34,7 +34,6 @@
 }
 
 .logout-button {
-  width: 130px;
   text-align: right;
 }
 
@@ -195,4 +194,22 @@
   box-sizing: border-box;
   width: 100%;
   text-align: center;
+}
+
+.my-profile {
+  background-image: url(./assets/images/account.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.hidden {
+  display: none;
 }
